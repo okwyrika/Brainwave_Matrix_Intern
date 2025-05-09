@@ -59,13 +59,15 @@ FROM dbo.pharma_data
 )
 select *
 from DuplicateRecords
-where duplicate_count > 1;
-
---Adding RowID 
+where duplicate_count > 1
+```
+Added a RowID 
+```{sql}
 Alter Table dbo.pharma_data
 Add RowID INT Identity(1,1);
-
---Deleting Duplicates
+```
+Deleted Duplicates
+```{sql}
 With CTE As (
 SELECT *,
 Row_Number() Over (Partition by Distributor,Customer_Name, City, Country, Latitude, 
@@ -77,117 +79,58 @@ FROM dbo.pharma-data
 )
 DElete from CTE
 where rn > 1;
-
---Removing temp column RowID
+```
+Then removed temp column RowID
+```{sql}
 Alter Table dbo.pharma_data
 Drop Column RowID;
 ```
 
+I checked for null values and deleted them.
+
+```{sql}
+select count(*) - count(Customer_Name) as Missing_count
+from dbo.pharma_data;
+```
+
 ## Analyze
 
-### Ride Length
+### Best Selling Product (Pharmay channel)
 
-I began my analysis process by finding the average ride length, maximum ride length and minimum ride length for all riders.
-
-```{sql}
-select avg(trip_duration) as avg_trip_duration,
-max(trip_duration) as max_trip_duration,
-min(trip_duration) as min_trip_duration
-from bikeshare_trip_bkp;
-```
-
-After running the above query, I noticed there are negative ride lengths and some ride lengths lasted for days which signifies a problem. I then wrote these queries to see how many negative rides and rides that lasted for days using the WHERE clause.
+I began my analysis process by finding the best selling products in the pharmacy channel and sub_channel.
 
 ```{sql}
-select count(*) as neg_trip_duration
-from bikeshare_trip_bkp
-where trip_duration <0;
+select Top 10 Product_Name,Sub_channel, sum(Sales) as Total_Sales
+from dbo.pharma_data
+where Channel = 'Pharmacy'
+group by Product_Name, Sub_channel
+order by Total_Sales desc;
 ```
-
-There are 37133 negative ride lengths.
+I checked Customers and Cities that are underperforming with the following codes
 
 ```{sql}
-select count(*) as X_trip_duration
-from bikeshare_trip_bkp
-where trip_duration >1440;
+select Top 10 Customer_Name, sum(Sales) as Total_Sales
+from dbo.pharma_data
+group by Customer_Name
+order by Total_Sales asc;
 ```
-There are 76312 rides that lasted for more than a day.
+```{sql}
+select Top 10 City, sum(Sales) as Total_Sales
+from dbo.pharma_data
+group by "City"
+order by Total_Sales asc;
+```
 
-Going further in this analysis process I will filter out all the negative rides and all rides that lasted for more than a day, as these will give error in my analysis.
-
-My new average, maximum and minimum ride length with filtered data set will now be
+I went further to check for Sales reps who are effective in driving the pharmacy sales with the following codes
 
 ```{sql}
-select avg(trip_duration) as avg_trip_duration,
-max(trip_duration) as max_trip_duration,
-min(trip_duration) as min_trip_duration
-from bikeshare_trip_bkp
-where trip_duration >0 and trip_duration < 1440;
-```
-Avg. ride length:643.4, Max. ride length:1439, Min. ride length:1
-
-I calculated the average trip duration of members, casual riders
-
-```{sql}
-select avg(trip_duration) as avg_trip_duration
-from bikeshare_trip_bkp
-where trip_duration >0 and
- trip_duration < 1440
- and member_casual ='member';
- ```
-
- The member's avg. trip duration is 640.4 mins
- 
-```{sql}
-select avg(trip_duration) as avg_trip_duration
-from bikeshare_trip_bkp
-where trip_duration >0 and
-trip_duration < 1440
-and member_casual ='casual';
-```
- The Casual riders avg. trip duration is 651.7 mins
- 
- I went further to calculate the average trip duration of each day of the week for members and casual riders.
- 
- ```{sql}
-select days, avg(trip_duration) as avg_casual_rides
-from bikeshare_trip_bkp
-where member_casual ='member'
-and trip_duration >0 
-and trip_duration <1440
-group by days
-order by days;
+select Top 5 Name_of_Sales_Rep, sum(Sales) as Total_Sales
+from dbo.pharma_data
+where Channel = 'Pharmacy'
+group by Name_of_Sales_Rep
+order by Total_Sales desc;
 ```
 
-```{sql}
-select days, avg(trip_duration) as avg_casual_rides
-from bikeshare_trip_bkp
-where member_casual ='casual'
-and trip_duration >0 
-and trip_duration <1440
-group by days
-order by days;
-```
-
-Also calculated the average trip duration of members and casual riders by Month.
-
-```{sql}
-select extract(month from started_at) as month, avg(trip_duration)
-from bikeshare_trip_bkp
-where trip_duration >0 and trip_duration < 1440
-and member_casual = 'member'
-group by month
-order by month;
-```
-
-```{sql}
-select extract(month from started_at) as month, avg(trip_duration)
-from bikeshare_trip_bkp
-where trip_duration >0 and trip_duration < 1440
-and member_casual = 'casual'
-group by month
-order by month;
-```
 
 ### Rideable Type
 
