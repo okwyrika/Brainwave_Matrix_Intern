@@ -83,21 +83,6 @@ Alter Table dbo.pharma_data
 Drop Column RowID;
 ```
 
-I found no misspelling or spaces in between words. I also checked for null values and removed them.
-
-```{sql}
-select count(*) - count(Customer_Name) as Missing_count
-from dbo.pharma_data;
-```
-
-```{sql}
-select ride_id, count(ride_id), rideable_type, started_at, ended_at, 
-start_station_name, start_station_id,end_station_name,
-end_station_id from bikeshare_trip group by ride_id having count(ride_id) > 1;
-```
-
-
-
 ## Analyze
 
 ### Ride Length
