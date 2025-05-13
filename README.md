@@ -14,7 +14,7 @@ This exercise is from Brainwave Matrix Internship Program.
 
 ## Scenario 
 
-You are a data analyst working on a sales team in a pharmaceutical company.The business owner wants to understand how the retail outlets are performing compared to hospital sales, especially across different cities. 
+You are a data analyst working on a sales team in a pharmaceutical company. The business owner wants to understand how the retail outlets are performing compared to hospital sales, especially across different cities. 
 
 ## Bussiness Task
 
@@ -27,7 +27,7 @@ My Boss has assigned me to analyze
 
 ## Prepare
 
-I downloaded my data from kaggle.  it can be found [here](https://www.kaggle.com/datasets/akanksha995579/pharma-data-analysis). I extracted the data from its zip file. All personally identifiable information was removed. The data consist of 14 columns: Distributor, Customer_Name, City, Country, Latitude, Longitude, Channel, Sub_channel, Product_Name, Product_Class, Quantity, Price, Sales, Month, Year, Name_of_Sales_Rep, Manager, Sales_Team. I created a folder for the data I need and named it appropriately.
+I downloaded my data from kaggle.  it can be found [here](https://www.kaggle.com/datasets/akanksha995579/pharma-data-analysis). I extracted the data from its zip file. The data is a pharmacy data for 2017 - 2020. All personally identifiable information was removed. The data consist of 14 columns: Distributor, Customer_Name, City, Country, Latitude, Longitude, Channel, Sub_channel, Product_Name, Product_Class, Quantity, Price, Sales, Month, Year, Name_of_Sales_Rep, Manager, Sales_Team. I created a folder for the data I need and named it appropriately.
 
 ## Process
 
@@ -97,29 +97,48 @@ from dbo.pharma_data;
 
 ### Best Selling Product (Pharmay channel)
 
-I began my analysis process by finding the best selling products in the pharmacy channel and sub_channel.
+I began my analysis process by finding the best selling products in the pharmacy channel based on their class.
 
 ```{sql}
-select Top 10 Product_Name,Sub_channel, sum(Sales) as Total_Sales
+select Top 10 Product_Name, Product_Class, sum(Sales) as Total_Sales
 from dbo.pharma_data
 where Channel = 'Pharmacy'
-group by Product_Name, Sub_channel
+group by Product_Name, Product_class
 order by Total_Sales desc;
 ```
-I checked Customers and Cities that are underperforming with the following codes
+
+### Top and Low Performing Customers and Cities
+
+I checked Top and low performing Customers and Cities with the following codes
 
 ```{sql}
 select Top 10 Customer_Name, sum(Sales) as Total_Sales
 from dbo.pharma_data
+where Channel = 'Pharmacy'
+group by Customer_Name
+order by Total_Sales desc;
+
+select Top 10 Customer_Name, sum(Sales) as Total_Sales
+from dbo.pharma_data
+where Channel = 'Pharmacy'
 group by Customer_Name
 order by Total_Sales asc;
 ```
 ```{sql}
 select Top 10 City, sum(Sales) as Total_Sales
 from dbo.pharma_data
+where Channel = 'Pharmacy'
+group by "City"
+order by Total_Sales desc;
+
+select Top 10 City, sum(Sales) as Total_Sales
+from dbo.pharma_data
+where Channel = 'Pharmacy'
 group by "City"
 order by Total_Sales asc;
 ```
+
+### Most Effective Sales Reps
 
 I went further to check for Sales reps who are effective in driving the pharmacy sales with the following codes
 
@@ -131,148 +150,40 @@ group by Name_of_Sales_Rep
 order by Total_Sales desc;
 ```
 
+### Price and Quantity
 
-### Rideable Type
-
-I decided to check if there are differences in the types of vehicles used among member and casual riders.
- 
- ```{sql}
-select rideable_type, count(rideable_type) as no_of_bike
-from bikeshare_trip_bkp
-where trip_duration >0 and trip_duration <1440
-and member_casual='member'
-group by rideable_type;
-```
+To answer the question of "are we pricing our top selling products competitively, or are we loosing out to hospital channels?", I ran the following codes
 
 ```{sql}
-select rideable_type, count(rideable_type) as no_of_bike
-from bikeshare_trip_bkp
-where trip_duration >0 and trip_duration <1440
-and member_casual='casual'
-group by rideable_type;
+select Top 10 Product_Name, Price, Quantity, sum(Sales) as Total_Sales
+from dbo.pharma_data
+where Channel = 'Pharmacy'
+group by Product_Name,Price, Quantity
+order by Total_Sales desc, Quantity desc;
+
+select Top 10 Product_Name, Price,Quantity, sum(Sales) as Total_Sales
+from dbo.pharma_data
+where Channel = 'Hospital'
+group by Product_Name,Price,Quantity
+order by Total_Sales desc, Quantity desc;
 ```
 
-### Most Popular Stations
+### Sales by Month and Year
 
-Looking out for the most frequently used stations by member and casual riders, I decided gto first find the most popular start stations for members and casual riders.
+I checked the total sales of the Pharmacy channel in months and years to identify seasonal patterns using this code
 
 ```{sql}
-select start_station_name, count(*) as rides_taken
-from bikeshare_trip_bkp
-where member_casual = 'member' 
-and trip_duration >0 
-and trip_duration <1440
-group by start_station_name
-order by rides_taken desc;
-```
-
-```{sql}
-select start_station_name, count(*) as rides_taken
-from bikeshare_trip_bkp
-where member_casual = 'casual' 
-and trip_duration >0 
-and trip_duration <1440
-group by start_station_name
-order by rides_taken desc;
-```
-
-Finding the most popular end stations for members and casuals
-
-```{sql]
-select end_station_name, count(*) as rides_taken
-from bikeshare_trip_bkp
-where member_casual = 'member' 
-and trip_duration >0 
-and trip_duration <1440
-group by end_station_name
-order by rides_taken desc;
-```
-
-```{sql}
-select end_station_name, count(*) as rides_taken
-from bikeshare_trip_bkp
-where member_casual = 'casual' 
-and trip_duration >0 
-and trip_duration <1440
-group by end_station_name
-order by rides_taken desc;
-```
-
-### Number Of Rides
-
-To know how many rides were taken by members and how many by casuals
-
-```{sql}
-select member_casual, count(*) as rides_taken
-from bikeshare_trip_bkp
-where trip_duration >0 
-and trip_duration <1440
-group by member_casual;
-```
-
-How many rides were taken on each day of the week by member and casual riders?
-
-```[sql}
-select dayname(started_at) as days, count(*) as rides_taken
-from bikeshare_trip_bkp
-where member_casual = 'member' 
-and trip_duration >0 
-and trip_duration <1440
-group by days
-order by days;
-
-```{sql}
-select dayname(started_at) as days, count(*) as rides_taken
-from bikeshare_trip_bkp
-where member_casual = 'casual' 
-and trip_duration >0 
-and trip_duration <1440
-group by days
-order by days;
-```
-
-Finding how many rides was taken by member and casual riders in each month
-
- ```{sql}
-select  Month, count(*) as ride_count
-from bikeshare_trip_bkp
-where trip_duration >0 and trip_duration<1440
-and member_casual = 'member'
+select Month, sum(Sales) as Total_Sales
+from dbo.pharma_data
+where Channel = 'Pharmacy'
 group by Month
-order by Month;
-```
+order by Total_Sales desc;
 
-```{sql}
-select  Month, count(*) as ride_count
-from bikeshare_trip_bkp
-where trip_duration >0 and trip_duration<1440
-and member_casual = 'casual'
-group by Month
-order by Month;
-```
-
-Checking how many rides were taken at each hour of the day for each day by member and casual riders
-
-```{sql}
-select  days, extract(hour from started_at) as hours,
-count(*) as rides_taken
-from bikeshare_trip_bkp
-where trip_duration >0 
-and trip_duration <1440
-and member_casual = 'member'
-group by days, hours
-order by days, hours desc;
-```
-
-```{sql}
-select  days, extract(hour from started_at) as hours,
-count(*) as rides_taken
-from bikeshare_trip_bkp
-where trip_duration >0 
-and trip_duration <1440
-and member_casual = 'casual'
-group by days, hours
-order by days, hours desc;
+select Year, sum(Sales) as Total_Sales
+from dbo.pharma_data
+where Channel = 'Pharmacy'
+group by Year
+order by Total_Sales desc;
 ```
 
 ## Share
