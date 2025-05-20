@@ -1,5 +1,5 @@
 # Sales Analysis
-This exercise is from Brainwave Matrix Internship Program.
+This exercise is in line with Brainwave Matrix Internship Program.
 
 ## Table Of Contents 
 - [Scenario ](Scenario)
