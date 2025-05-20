@@ -187,7 +187,7 @@ order by Total_Sales desc;
 ```
 
 ## Share
-I used Tableau Public to carry out my visualizations. Click [here](https://public.tableau.com/app/profile/anurika.chukwunenye/viz/Bike_ridecapstone/Dashboard1) to view my interactive dashboard.
+I used Tableau Public to carry out my visualizations. Click [here](https://public.tableau.com/app/profile/anurika.chukwunenye/viz/Top_sellingProduct/Pharma_SalesAnalysis) to view my interactive dashboard.
 
 ## Findings
 - Members have the highest average ride duration of 655.3 mins on Sundays while Casual riders have the highest average ride duration of 666.98 Mins on Wednesdays.
