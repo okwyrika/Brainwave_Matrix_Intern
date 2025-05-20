@@ -19,8 +19,8 @@ You are a data analyst working on a sales team in a pharmaceutical company. The 
 ## Bussiness Task
 
 My Boss has assigned me to analyze 
-1. Which Products are driving the most revenuein our pharmacy sub-channel. annual members and casual riders use Cyclist bikes differently.
-2. Are there specific cities or customer typeswhere our pharmacy sales are unerperforming?
+1. Which Products are driving the most revenuein our pharmacy sub-channel.
+2. Are there specific cities or customer types where our pharmacy sales are underperforming?
 3. Which sales reps are most effective in driving pharmacy sales, can we replicate their strategies across regions?
 4. Are we Pricing our top-selling products competitively, or are we losing out to hospital channel?
 5. Can we identify seasonal patterns in the pharmacy sales that can help with inventory and marketing planning?
@@ -190,20 +190,24 @@ order by Total_Sales desc;
 I used Tableau Public to carry out my visualizations. Click [here](https://public.tableau.com/app/profile/anurika.chukwunenye/viz/Top_sellingProduct/Pharma_SalesAnalysis) to view my interactive dashboard.
 
 ## Findings
-- Butzbach leads in sales,signifucantly ahead of other cities. Baesweiler and Cuhaven also performed well but are behind Butzbach.
+- Butzbach leads in sales, signifucantly ahead of other cities. Baesweiler and Cuhaven also performed well but are behind Butzbach. The pharmacy is underperforming in Nowy Targ.
 - Mraz-KUtch Pharma Plc and Parker,Green and Emmerich are the top customers. Few customers drive a large portion of the pharmacy sales which indicates customer concentration risk.
 - Ionotide is the top-selling product. It accounted for 16.5% of the total sales, followed by Tetranryl and Symdoect at 10.8% and 9.9% respectively. The product mix shows the pharmacy sales are concentrated in few products.
 - Jimmy Grey and Abigail Thompsom are the top performing sales reps. The gap between the top and lower performing Sales reps is narrow, suggesting consistent performance overall.
-- 
+- August has the highest sales, followed by November and March. January and April are the lowest.
+- Peak sales occured in 2018 followed by a steady decline which was most significant in 2020 - could be due to market disruption like Covid-19
 
 ## Act
 
 ### Recommendation 
-Based on my analysis, I recommend the following actions
-- Cyclist should target casual riders that have a longer ride duration and give them a time-limited membership offer.
-- There should be a promo program targeted for Casual riders that have the characteristics of Members.
-- Casual riders should be offered various membership option like monthly, quarterly, annual to cater different user preferences.
+Based on my analysis, I recommend the manager to
+- Focus marketing and distribution efforts on sustaining performance in Butzbach and replicating its strategy in cities like Nowy Targ and other similar markets.
+- Diversify the customer base and offer incentives to mid-tier customers to grow their sales.
+- Ensure stock availability for top selling products and consider bundling with less popular products.
+- Identify what top sales reps do differently and use it to train others.
+- Explore seasonality factors like health trends to explain and optimize low performing months.
+- Investigate the cause of the decline over time and strategize recovery.
 
 
-PS: This is my first Data Analytics Project and it is prone to flaws. Constructive criticism on this project is welcomed.
+
 
