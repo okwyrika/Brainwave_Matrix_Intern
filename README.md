@@ -190,13 +190,11 @@ order by Total_Sales desc;
 I used Tableau Public to carry out my visualizations. Click [here](https://public.tableau.com/app/profile/anurika.chukwunenye/viz/Top_sellingProduct/Pharma_SalesAnalysis) to view my interactive dashboard.
 
 ## Findings
-- Members have the highest average ride duration of 655.3 mins on Sundays while Casual riders have the highest average ride duration of 666.98 Mins on Wednesdays.
-- July have the highest average ride duration by members and Casual riders with 743.2 Mins and 790.5 Mins respectively.
-- Electric bikes have the highest users, followed by Classic bikes and docked bikes.
-- The total number of rides by Members and Casual riders are 59439 and 21390 respectively.
-- Highest ride count by month is in January with 19044 rides by Members and 6090 rides by Casual riders.
-- Highest ride count by day is on Tuesday by Members and Wednesday by Casual riders.
-- The Members and Casual riders' peak ride hour is on the 17th hour.
+- Butzbach leads in sales,signifucantly ahead of other cities. Baesweiler and Cuhaven also performed well but are behind Butzbach.
+- Mraz-KUtch Pharma Plc and Parker,Green and Emmerich are the top customers. Few customers drive a large portion of the pharmacy sales which indicates customer concentration risk.
+- Ionotide is the top-selling product. It accounted for 16.5% of the total sales, followed by Tetranryl and Symdoect at 10.8% and 9.9% respectively. The product mix shows the pharmacy sales are concentrated in few products.
+- Jimmy Grey and Abigail Thompsom are the top performing sales reps. The gap between the top and lower performing Sales reps is narrow, suggesting consistent performance overall.
+- 
 
 ## Act
 
