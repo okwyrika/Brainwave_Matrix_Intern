@@ -19,7 +19,7 @@ You are a data analyst working on a sales team in a pharmaceutical company. The 
 ## Bussiness Task
 
 My Boss has assigned me to analyze 
-1. Which Products are driving the most revenuein our pharmacy sub-channel.
+1. Which Products are driving the most revenue in our pharmacy sub-channel.
 2. Are there specific cities or customer types where our pharmacy sales are underperforming?
 3. Which sales reps are most effective in driving pharmacy sales, can we replicate their strategies across regions?
 4. Are we Pricing our top-selling products competitively, or are we losing out to hospital channel?
@@ -27,7 +27,7 @@ My Boss has assigned me to analyze
 
 ## Prepare
 
-I downloaded my data from kaggle.  it can be found [here](https://www.kaggle.com/datasets/akanksha995579/pharma-data-analysis). I extracted the data from its zip file. The data is a pharmacy data for 2017 - 2020. All personally identifiable information was removed. The data consist of 14 columns: Distributor, Customer_Name, City, Country, Latitude, Longitude, Channel, Sub_channel, Product_Name, Product_Class, Quantity, Price, Sales, Month, Year, Name_of_Sales_Rep, Manager, Sales_Team. I created a folder for the data I need and named it appropriately.
+I downloaded my data from kaggle.  It can be found [here](https://www.kaggle.com/datasets/akanksha995579/pharma-data-analysis). I extracted the data from its zip file. The data is a pharmacy data for 2017 - 2020. All personally identifiable information was removed. The data consist of 14 columns: Distributor, Customer_Name, City, Country, Latitude, Longitude, Channel, Sub_channel, Product_Name, Product_Class, Quantity, Price, Sales, Month, Year, Name_of_Sales_Rep, Manager, Sales_Team. I created a folder for the data I need and named it appropriately.
 
 ## Process
 
@@ -200,7 +200,7 @@ I used Tableau Public to carry out my visualizations. Click [here](https://publi
 ## Act
 
 ### Recommendation 
-Based on my analysis, I recommend the manager to
+Based on my analysis, I recommend the business owner to
 - Focus marketing and distribution efforts on sustaining performance in Butzbach and replicating its strategy in cities like Nowy Targ and other similar markets.
 - Diversify the customer base and offer incentives to mid-tier customers to grow their sales.
 - Ensure stock availability for top selling products and consider bundling with less popular products.
