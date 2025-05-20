@@ -195,7 +195,7 @@ I used Tableau Public to carry out my visualizations. Click [here](https://publi
 - Ionotide is the top-selling product. It accounted for 16.5% of the total sales, followed by Tetranryl and Symdoect at 10.8% and 9.9% respectively. The product mix shows the pharmacy sales are concentrated in few products.
 - Jimmy Grey and Abigail Thompsom are the top performing sales reps. The gap between the top and lower performing Sales reps is narrow, suggesting consistent performance overall.
 - August has the highest sales, followed by November and March. January and April are the lowest.
-- Peak sales occured in 2018 followed by a steady decline which was most significant in 2020 - could be due to market disruption like Covid-19
+- Peak sales occured in 2018 followed by a steady decline which was most significant in 2020 - could be due to market disruption like Covid-19.
 
 ## Act
 
